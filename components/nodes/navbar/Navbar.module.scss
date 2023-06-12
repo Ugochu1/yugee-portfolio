@@ -1,0 +1,30 @@
+@import "../../styles/colors";
+@import "../../styles/mixins";
+
+.navbar {
+  padding: 24px 30px;
+  line-height: 1;
+  @apply text-sm;
+  @apply flex;
+
+  .navigation {
+    @apply flex bg-white;
+    padding: 4px;
+    font-size: 12.5px;
+    border-radius: 50em;
+    color: $darkgray;
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.5);
+    .link {
+      padding: 8px 16px;
+      font-weight: 200;
+      @include reduceFontHeight;
+      &.active {
+        background-color: black;
+        color: $lightestgray;
+        border-radius: 50em;
+        @apply flex justify-center items-center;
+      }
+    }
+  }
+}

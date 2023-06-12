@@ -1,0 +1,24 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.logo {
+  line-height: 1;
+  .main_logo {
+    @apply flex items-center;
+    font-weight: 600;
+    // color: $darkgray;
+    .alpha {
+      // @include reduceFontHeight;
+      @apply text-sm;
+    }
+    &:hover {
+      color: $lightgray;
+    }
+  }
+  .location {
+    @apply text-xs md:text-sm;
+    color: $lightgray;
+    // @include reduceFontHeight;
+    margin-top: -2px;
+  }
+}
