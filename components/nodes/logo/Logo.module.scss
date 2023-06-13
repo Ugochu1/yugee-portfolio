@@ -1,22 +1,24 @@
 @import "../../styles/mixins";
 @import "../../styles/colors";
+@import "../../styles/fonts";
 
 .logo {
   line-height: 1;
+  font-family: $manrope;
   .main_logo {
     @apply flex items-center;
     font-weight: 600;
     // color: $darkgray;
     .alpha {
       // @include reduceFontHeight;
-      @apply text-sm;
+      @apply text-base md:text-sm;
     }
     &:hover {
       color: $lightgray;
     }
   }
   .location {
-    @apply text-xs md:text-sm;
+    @apply md:text-sm;
     color: $lightgray;
     // @include reduceFontHeight;
     margin-top: -2px;

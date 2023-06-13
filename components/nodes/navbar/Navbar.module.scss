@@ -1,11 +1,72 @@
 @import "../../styles/colors";
 @import "../../styles/mixins";
+@import "../../styles/fonts";
+
+.drop {
+  z-index: 8;
+  @apply flex justify-center items-center flex-col lg:hidden;
+  transition: 500ms ease-in-out;
+  background-color: #f5f5f5;
+  font-family: $manrope;
+
+  .def{
+    color: $lighterdarkgray;
+    @apply text-xs mb-0.5;
+  }
+  
+  .link {
+    @apply text-xl;
+    padding: 12px 20px;
+    font-weight: 400;
+    text-align: center;
+    // @include reduceFontHeight;
+    &.active {
+      background-color: black;
+      color: white;
+      border-radius: 50em;
+      // @apply flex justify-center items-center;
+    }
+  }
+}
 
 .navbar {
-  padding: 24px 30px;
+  // padding: 24px 30px;
+  @apply lg:py-[24px] lg:px-[30px] py-[4px] px-[20px] md:py-[8px] md:px-[25px];
   line-height: 1;
+  z-index: 10;
+  font-family: $manrope;
+  @apply fixed w-full lg:bg-inherit bg-[#f5f5f5];
   @apply text-sm;
-  @apply flex;
+  @apply flex items-center justify-between;
+
+  .dropdown {
+    height: 48px;
+    width: 48px;
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &.active {
+      div {
+        transform : rotate(-45deg);
+        &:last-child {
+          transform: rotate(45deg) translateY(-2px);
+        }
+      }
+    }
+    div {
+      // display: block;
+      height: 2px;
+      width: 100%;
+      background: black;
+      transition: 300ms ease-out;
+      &:last-child {
+        transform: translateY(-2px);
+      }
+    }
+    
+  }
 
   .navigation {
     @apply flex bg-white;
@@ -15,16 +76,24 @@
     color: $darkgray;
     backdrop-filter: blur(12px);
     background-color: rgba(255, 255, 255, 0.5);
+    font-family: $manrope;
     .link {
       padding: 8px 16px;
-      font-weight: 200;
-      @include reduceFontHeight;
+      font-weight: 400;
       &.active {
         background-color: black;
         color: $lightestgray;
         border-radius: 50em;
         @apply flex justify-center items-center;
       }
+    }
+  }
+
+  .socials {
+    font-family: $manrope;
+    .def{
+      color: $lighterdarkgray;
+      @apply  mb-0.5;
     }
   }
 }

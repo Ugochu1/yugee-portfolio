@@ -1,0 +1,26 @@
+@import "../components/styles/colors";
+@import "../components/styles/fonts";
+
+.container {
+  width: 100%;
+  font-family: $manrope;
+  @apply px-4;
+  .intro {
+    @apply flex md:flex-row flex-col-reverse lg:pt-[18em] lg:pb-[6em] md:pt-[132px] pb-[48px] pt-[105px];
+    .awards_and_titles {
+      @apply md:w-[40%] text-xs md:pl-5;
+      color: $lighterdarkgray;
+      line-height: 1.5;
+      .info {
+        @apply md:max-w-[250px] lg:max-w-[200px] flex flex-col justify-between h-full lg:py-[5em] md:py-[3.3em];
+      }
+    }
+    .description {
+      @apply md:w-[60%] lg:text-[4.8em] md:px-[0] md:pr-[1em] md:text-[3.3em] text-[2.2em];
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin: 0.67em 0;
+      line-height: 1.1;
+    }
+  }
+}
