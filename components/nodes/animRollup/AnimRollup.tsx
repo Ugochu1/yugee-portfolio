@@ -6,9 +6,10 @@ import { useCursor } from "@/contexts/CursorProvider";
 interface Props {
   children?: ReactNode;
   style?: object;
+  onClick?: () => void
 }
 
-const AnimRollup: FC<Props> = ({ children, style }) => {
+const AnimRollup: FC<Props> = ({ children, style, onClick }) => {
   const mainDiv = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<number | undefined>(0);
   const [pos, setPos] = useState<number | undefined>(0);
@@ -19,9 +20,7 @@ const AnimRollup: FC<Props> = ({ children, style }) => {
   }, []);
 
   return (
-    <div
-      className={styles.rollup}
-      style={{ ...style, maxHeight: `${height}px` }}
+    <button
       onMouseEnter={() => {
         setType("hover");
         setPos(height);
@@ -30,16 +29,20 @@ const AnimRollup: FC<Props> = ({ children, style }) => {
         setType("none");
         setPos(0);
       }}
+      style={style}
+      onClick={onClick}
     >
-      {/* {JSON.stringify(inView)} */}
-      <div
-        className={styles.content}
-        style={{ transform: `translateY(-${pos}px)` }}
-      >
-        <div ref={mainDiv}>{children}</div>
-        <div>{children}</div>
+      <div className={styles.rollup} style={{ maxHeight: `${height}px` }}>
+        {/* {JSON.stringify(inView)} */}
+        <div
+          className={styles.content}
+          style={{ transform: `translateY(-${pos}px)` }}
+        >
+          <div ref={mainDiv}>{children}</div>
+          <div>{children}</div>
+        </div>
       </div>
-    </div>
+    </button>
   );
 };
 

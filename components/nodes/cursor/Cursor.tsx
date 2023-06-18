@@ -11,8 +11,8 @@ const Cursor: FC = () => {
     document.addEventListener("mousemove", (e) => {
       cursor.current!.style.top = `${e.clientY - 12}px`;
       cursor.current!.style.left = `${e.clientX - 15}px`;
-      cursorFollower.current!.style.top = `${e.clientY - 14.5}px`;
-      cursorFollower.current!.style.left = `${e.clientX - 17.5}px`;
+      cursorFollower.current!.style.top = `${e.clientY - 15}px`;
+      cursorFollower.current!.style.left = `${e.clientX - 18.5}px`;
     });
   }, []);
 
@@ -22,9 +22,9 @@ const Cursor: FC = () => {
       <div
         className={`${styles.cursor} ${type === "none" && styles.none} ${
           type === "hover" && styles.hover
-        } ${type === "open" && styles.open} hidden lg:block`}
+        } ${type === "open" && styles.open} hidden lg:flex`}
         ref={cursor}
-      ></div>
+      >{type === "open" && "OPEN"}</div>
       <div
         className={`${styles.cursorfollower} ${type !== "none" && styles.hidden} hidden lg:block`}
         ref={cursorFollower}

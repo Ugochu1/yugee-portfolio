@@ -1,8 +1,9 @@
 import { FC, useEffect, useState, useRef } from "react";
 import styles from "./PageLoader.module.scss";
-import { useRouter } from "next/router";
 
-const PageLoader: FC = () => {
+const PageLoader: FC<{ setPageLoad: (cv: boolean) => void }> = ({
+  setPageLoad,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mainContainerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(0);
@@ -12,15 +13,21 @@ const PageLoader: FC = () => {
     setTimeout(() => {
       if (mainContainerRef.current) {
         mainContainerRef.current.style.top = "-100vh";
+        setTimeout(() => {
+          // wait 500ms before deleting from DOM
+          setPageLoad(false)
+        }, 1000)
       }
-    }, 1250)
-  }, []);
+    }, 1250);
+  }, [setPageLoad]);
 
   return (
     <div className={styles.main} ref={mainContainerRef}>
       {/* {JSON.stringify(height)} */}
-      <div style={{overflow: "hidden", height: `${height}px`}}>
-        <div className={styles.name} ref={containerRef}>James Olinya</div>
+      <div style={{ overflow: "hidden", height: `${height}px` }}>
+        <div className={styles.name} ref={containerRef}>
+          James Olinya
+        </div>
         {/* <div className={styles.nametwo}>James Olinya</div> */}
       </div>
     </div>

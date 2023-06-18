@@ -4,6 +4,9 @@ import Logo from "../logo/Logo";
 import Link from "next/link";
 import { useCursor } from "@/contexts/CursorProvider";
 import AnimRollup from "../animRollup/AnimRollup";
+import { useRouter } from "next/router";
+import { useInView } from "react-intersection-observer";
+import Contacts from "../contacts/Contacts";
 
 export const socialsStyle = {
   fontSize: "12px",
@@ -21,19 +24,33 @@ export function getOpacity(scrollPos: number, threshold: number) {
   return opacity;
 }
 
-const Navbar: FC = () => {
+interface NavbarProps {
+  scrollPos: number;
+}
+
+const Navbar: FC<NavbarProps> = ({ scrollPos }) => {
+  const router = useRouter();
   const { setType } = useCursor();
-  const [scrollPos, setScrollPos] = useState<number>(0);
   const [dropped, setDropped] = useState<boolean>(false);
+  const [active, setActive] = useState<string>("");
+  const {ref, inView} = useInView({
+    threshold: 1
+  })
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    document.addEventListener("scroll", () => {
-      setScrollPos(document.documentElement.scrollTop);
-    });
-  }, []);
+    if (router.pathname.includes("projects")) {
+      setActive("projects");
+    } else if (router.pathname.includes("about")) {
+      setActive("about");
+    } else {
+      setActive("home");
+    }
+  }, [router.pathname]);
 
   return (
     <>
+    <Contacts contactOpen={contactOpen} setContactOpen={setContactOpen} />
       <div
         className={
           "fixed left-0 w-full h-[100vh] " +
@@ -42,10 +59,12 @@ const Navbar: FC = () => {
         }
       >
         <div>
-          <Link href="">
-            <div className="text-center">
+          <Link href="/">
+            <div className="text-center" onClick={() => setDropped(false)}>
               <span
-                className={`${styles.link} ${styles.active}`}
+                className={`${styles.link} ${
+                  active === "home" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
@@ -53,21 +72,25 @@ const Navbar: FC = () => {
               </span>
             </div>
           </Link>
-          <Link href="">
-            <div className="text-center mt-7">
+          <Link href="/projects">
+            <div className="text-center mt-6" onClick={() => setDropped(false)}>
               <span
-                className={`${styles.link}`}
+                className={`${styles.link} ${
+                  active === "projects" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
-                Case Studies
+                Projects
               </span>
             </div>
           </Link>
-          <Link href="">
-            <div className="text-center mt-7">
+          <Link href="/about">
+            <div className="text-center mt-6" onClick={() => setDropped(false)}>
               <span
-                className={`${styles.link}`}
+                className={`${styles.link} ${
+                  active === "about" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
@@ -76,11 +99,12 @@ const Navbar: FC = () => {
             </div>
           </Link>
           <Link href="">
-            <div className="text-center mt-7">
+            <div className="text-center mt-6" onClick={() => setDropped(false)}>
               <span
                 className={`${styles.link}`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
+                onClick={() => setContactOpen(true)}
               >
                 Contacts
               </span>
@@ -90,20 +114,42 @@ const Navbar: FC = () => {
         <div className="mt-10">
           <div className="flex flex-col items-center">
             <p className={styles.def}>Social:</p>
-            <div className="flex mt-3">
-              <Link href="">
-                <AnimRollup style={mobileSocialStyle}>TW</AnimRollup>
-              </Link>
-              <Link href="">
-                {/* {JSON.stringify(scrollPos)} */}
-                <AnimRollup style={mobileSocialStyle}>IG</AnimRollup>
-              </Link>
-              <Link href="">
-                <AnimRollup style={mobileSocialStyle}>BE</AnimRollup>
-              </Link>
-              <Link href="">
-                <AnimRollup style={mobileSocialStyle}>DRIB</AnimRollup>
-              </Link>
+            <div className="overflow-hidden" ref={ref}>
+              <div className={`flex mt-3 ${styles.socialDrop} ${inView && styles.inView}`}>
+                <Link href="">
+                  <AnimRollup
+                    style={mobileSocialStyle}
+                    onClick={() => setDropped(false)}
+                  >
+                    TW
+                  </AnimRollup>
+                </Link>
+                <Link href="">
+                  {/* {JSON.stringify(scrollPos)} */}
+                  <AnimRollup
+                    style={mobileSocialStyle}
+                    onClick={() => setDropped(false)}
+                  >
+                    IG
+                  </AnimRollup>
+                </Link>
+                <Link href="">
+                  <AnimRollup
+                    style={mobileSocialStyle}
+                    onClick={() => setDropped(false)}
+                  >
+                    BE
+                  </AnimRollup>
+                </Link>
+                <Link href="">
+                  <AnimRollup
+                    style={mobileSocialStyle}
+                    onClick={() => setDropped(false)}
+                  >
+                    DRIB
+                  </AnimRollup>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +157,7 @@ const Navbar: FC = () => {
 
       {/* big navbar is here. */}
       <div className={styles.navbar}>
-        <div className={"md:w-[40%] w-1/2 flex items-center"}>
+        <div className={"md:w-[39%] w-1/2 flex items-center"}>
           <Logo scrollPos={scrollPos} />
         </div>
         <div
@@ -125,31 +171,37 @@ const Navbar: FC = () => {
         </div>
         <div
           className={
-            "w-full md:w-[60%] hidden lg:flex items-center justify-between"
+            "w-full md:w-[61%] hidden lg:flex items-center justify-between"
           }
         >
           <div className={styles.navigation}>
-            <Link href="">
+            <Link href="/">
               <p
-                className={`${styles.link} ${styles.active}`}
+                className={`${styles.link}  ${
+                  active === "home" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
                 Home
               </p>
             </Link>
-            <Link href="">
+            <Link href="/projects">
               <p
-                className={styles.link}
+                className={`${styles.link}  ${
+                  active === "projects" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
-                Case Studies
+                Projects
               </p>
             </Link>
-            <Link href="">
+            <Link href="/about">
               <p
-                className={styles.link}
+                className={`${styles.link}  ${
+                  active === "about" && styles.active
+                }`}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
               >
@@ -161,6 +213,7 @@ const Navbar: FC = () => {
                 className={styles.link}
                 onMouseOver={() => setType("hover")}
                 onMouseLeave={() => setType("none")}
+                onClick={() => setContactOpen(true)}
               >
                 Contacts
               </p>
