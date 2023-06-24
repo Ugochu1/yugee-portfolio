@@ -19,6 +19,13 @@ const AnimRollup: FC<Props> = ({ children, style, onClick }) => {
     setHeight(mainDiv.current?.scrollHeight);
   }, []);
 
+  function callback() {
+    if (onClick) {
+      onClick();
+    }
+    setType("none");
+  }
+
   return (
     <button
       onMouseEnter={() => {
@@ -30,7 +37,7 @@ const AnimRollup: FC<Props> = ({ children, style, onClick }) => {
         setPos(0);
       }}
       style={style}
-      onClick={onClick}
+      onClick={callback}
     >
       <div className={styles.rollup} style={{ maxHeight: `${height}px` }}>
         {/* {JSON.stringify(inView)} */}

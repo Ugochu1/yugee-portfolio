@@ -6,6 +6,7 @@ import ImageFour from "../src/images/fourth.jpg";
 import ImageFive from "../src/images/fifth.jpg";
 
 export interface ProjectData {
+  id: string;
   client: string;
   year: string;
   scope: string;
@@ -19,11 +20,12 @@ export interface ProjectData {
 
 export const projectData: ProjectData[] = [
   {
+    id: "sana",
     client: "Sana",
     year: "2022",
     scope: "Web and Mobile Development",
     location: "Birmingham",
-    liveLink: "app.sanatransfer.dev",
+    liveLink: "https://app.sanatransfer.dev",
     mainPicture: ImageOne,
     pictures: [],
     description: "",
@@ -31,6 +33,7 @@ export const projectData: ProjectData[] = [
   },
 
   {
+    id: "linum_labs",
     client: "Linum Labs",
     year: "2022",
     scope: "Fullstack Web Development",
@@ -42,6 +45,7 @@ export const projectData: ProjectData[] = [
     categories: ["web"]
   },
   {
+    id: "youverify",
     client: "Youverify",
     year: "2020",
     scope: "Fullstack Web and Mobile Development",
@@ -53,6 +57,7 @@ export const projectData: ProjectData[] = [
     description: "",
   },
   {
+    id: "mendfy",
     client: "Mendfy",
     year: "2018",
     scope: "Fullstack Web Development",
@@ -64,6 +69,7 @@ export const projectData: ProjectData[] = [
     categories: ["mobile"]
   },
   {
+    id: "heralding",
     client: "Heralding",
     year: "2016",
     scope: "Fullstack Web Development",
@@ -75,3 +81,22 @@ export const projectData: ProjectData[] = [
     categories: ["web"]
   },
 ];
+
+export function getAllProjectIds() {
+  return projectData.map((project) => {
+    return {
+      params: {
+        id: project.id
+      }
+    }
+  })
+}
+
+export function getProject(id: string) {
+  const index = projectData.findIndex(object => object.id === id)
+  // return projectData.filter((project) => project.id === id)[0];
+  if (index < projectData.length - 1) {
+    return [projectData[index], projectData[index+1]]
+  }
+  return [projectData[index], projectData[0]]
+}

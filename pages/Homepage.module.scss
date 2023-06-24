@@ -1,21 +1,25 @@
 @import "../components/styles/colors";
 
 .workspace {
-  @apply lg:aspect-[2.5/1] md:aspect-[2/1] aspect-[1.1/1] sm:aspect-[1.5/1] p-0 m-0;
+  @apply xl:aspect-[2.3/1] lg:aspect-[2/1] md:aspect-[2.1/1] xs:aspect-[2/1] aspect-[1.8/1] p-0 m-0;
   position: relative;
+  overflow: hidden;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  transform-style: preserve-3d;
+  align-items: center;
+  justify-content: center;
 
   .bg {
     position: absolute;
     inset: 0;
-    width: 100vw;
+    // width: 100%;
+    margin: auto;
     background-image: url("../public/workspace.webp");
     background-size: cover;
     background-position: center center;
-    transform: translateZ(-5px) scale(1.5);
+    vertical-align: middle;
+    display: inline-block;
+    transform-style: preserve-3d;
+    transition: all linear .1s;
   }
 }
 
@@ -23,7 +27,7 @@
   @apply flex xs:flex-row flex-col-reverse xl:pt-[18em] xl:pb-[2em] lg:pt-[15em] md:pt-[132px] xs:pb-[30px] pb-[45px] xs:pt-[105px] pt-[80px];
   @apply px-5 md:px-3;
   .awards_and_titles {
-    @apply xs:w-[40%] text-xs md:pl-5;
+    @apply xs:w-[39%] text-xs md:pl-5;
     color: $darkgray;
     line-height: 1.5;
     .info {
@@ -31,7 +35,7 @@
     }
   }
   .description {
-    @apply xs:w-[60%] my-[0.5em] xs:px-2 sm:px-0 xs:my-[0.67em] text-[45px] xs:text-[2.3em] sm:text-[3em] lg:text-[3.8em] xl:text-[4.8em] md:px-[0] md:pr-[0.3em] md:text-[3.3em];
+    @apply xs:w-[61%] my-[0.5em] xs:px-2 sm:px-0 xs:my-[0.67em] text-[45px] xs:text-[2.3em] sm:text-[3em] lg:text-[3.8em] xl:text-[4.8em] md:pr-[0.3em] md:text-[3.3em];
     letter-spacing: -0.03em;
     font-weight: 400;
     line-height: 1.1;
@@ -43,12 +47,11 @@
 }
 
 .about {
-  @apply xl:py-[120px] lg:py-[90px] md:py-[80px] py-[50px] md:px-10 px-5;
-  @apply xs:w-[63%] w-full;
-  transform: translateY(30px);
+  @apply xl:py-[120px] lg:py-[90px] md:py-[80px] xs:pt-[40px] pb-[50px] md:pr-10 md:pl-0 px-5;
+  @apply xs:w-[60.5%] w-full;
+  transform: translateY(50px);
   opacity: 0;
-  transition: 500ms ease-in-out;
-  transition-delay: 200ms;
+  transition: 1s;
   &.inView {
     transform: translateY(0);
     opacity: 1;
@@ -65,6 +68,54 @@
     @apply md:flex md:items-end md:justify-between;
     p {
       @apply md:w-[70%] text-[14px] w-full pb-[24px] md:pb-0;
+    }
+  }
+}
+
+.section {
+  @apply mb-[12.24px] xs:mb-[15.93px] sm:mb-[21.09px] md:mb-[26.94px] lg:mb-[32.88px] xl:mb-[40.98px];
+  p {
+    font-size: 12px;
+    line-height: 18px;
+    &:first-child {
+      color: $lighterdarkgray;
+    }
+  }
+  .laurelSection {
+    @apply xl:py-[116.11px] lg:py-[94.775px] md:py-[72px] sm:py-[56px] py-[64px];
+    @apply flex xs:flex-row flex-col;
+    @apply xl:px-[34.150px] lg:px-[27.875px] md:px-[24px] px-[20px];
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 400ms ease-in;
+    &.inView {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .header {
+      @apply xs:w-[39.5%] xl:w-[39%];
+      @apply text-[18px] mb-7;
+    }
+    .details {
+      @apply xs:w-[60.5%] xl:w-[61%];
+      .method {
+        @apply flex flex-col md:flex-row;
+        @apply xl:py-[20.49px] lg:py-[16.725px] py-[18px];
+        border-bottom: 1px solid $lightestgray;
+        h2 {
+          @apply md:w-[49%] w-full;
+          @apply xl:text-[17.758px] lg:text-[14.495px] text-[16px];
+          @apply mb-3;
+        }
+        p {
+          @apply md:w-[51%] w-full;
+          @apply xl:text-[13.66px] lg:text-[11.15px] text-[12.8px];
+          @apply xl:leading-[20.49px] lg:leading-[16.725px] leading-[19.2px];
+        }
+        &:first-child {
+          padding-top: 0;
+        }
+      }
     }
   }
 }

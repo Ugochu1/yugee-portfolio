@@ -1,45 +1,77 @@
 import Navbar from "@/components/nodes/navbar/Navbar";
 import styles from "./MainLayout.module.scss";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import Cursor from "@/components/nodes/cursor/Cursor";
 import PageLoader from "@/components/nodes/pageLoader/PageLoader";
 import { useRouter } from "next/router";
-import Footer from "@/components/nodes/footer/Footer";
+import { createContext } from "react";
+import Contacts from "@/components/nodes/contacts/Contacts";
 
 export interface MainLayoutProps {
   children?: ReactNode;
 }
 
+interface PageLoadContextInterface {
+  pageLoad: boolean | null;
+  setPageLoad: (cv: boolean) => void;
+}
+
+const PageLoadContext = createContext<PageLoadContextInterface>({
+  pageLoad: null,
+  setPageLoad: () => null,
+});
+
+interface ContactOpenInterface {
+  contactOpen: boolean | null;
+  setContactOpen: (cv: boolean) => void;
+}
+
+const ContactContext = createContext<ContactOpenInterface>({
+  contactOpen: null,
+  setContactOpen: () => null,
+});
+
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const globalChild = useRef<HTMLDivElement>(null);
-  const [scrollPos, setScrollPos] = useState<number>(0);
   const [pageLoad, setPageLoad] = useState<boolean>(true);
   const router = useRouter();
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
+
+  const loadContext: PageLoadContextInterface = {
+    pageLoad,
+    setPageLoad,
+  };
+
+  const contactContext: ContactOpenInterface = {
+    contactOpen,
+    setContactOpen,
+  };
 
   useEffect(() => {
-    globalChild.current?.scrollTo({
-      top: 0,
-    });
     setPageLoad(true);
-    setTimeout(() => {}, 200)
+    setTimeout(() => {}, 200);
   }, [router.pathname]);
 
-  useEffect(() => {
-    globalChild.current?.addEventListener("scroll", () => {
-      setScrollPos(globalChild.current?.scrollTop || 0);
-    });
-  }, []);
   return (
     <div className={styles.global}>
-      <Navbar scrollPos={scrollPos} />
-      <Cursor />
+      <Contacts contactOpen={contactOpen} setContactOpen={setContactOpen} />
       {pageLoad && <PageLoader setPageLoad={setPageLoad} />}
-      <div className={styles.globalchild} ref={globalChild}>
-        {children}
-        {!pageLoad && <Footer />}
-      </div>
+      <ContactContext.Provider value={contactContext}>
+        <Navbar />
+        <Cursor />
+        <PageLoadContext.Provider value={loadContext}>
+          <>{children}</>
+        </PageLoadContext.Provider>
+      </ContactContext.Provider>
     </div>
   );
 };
+
+export function usePageLoader() {
+  return useContext(PageLoadContext);
+}
+
+export function useContactOpen() {
+  return useContext(ContactContext);
+}
 
 export default MainLayout;

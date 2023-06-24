@@ -5,7 +5,7 @@ import { ReactNode, useEffect } from "react";
 import CursorProvider from "@/contexts/CursorProvider";
 import { useRouter } from "next/router";
 
-export type NextPageWithLayout = NextPage & {
+export type NextPageWithLayout<P = {}> = NextPage<P> & {
   getLayout?: (children: ReactNode) => ReactNode;
 };
 
