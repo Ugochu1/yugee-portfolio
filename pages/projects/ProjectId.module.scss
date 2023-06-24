@@ -1,0 +1,67 @@
+@import "../../components/styles/colors";
+
+.pageWrapper {
+  .details {
+    @apply xl:px-[34.15px] lg:px-[27.875px] md:px-[24px] px-[20px];
+    @apply lg:pt-[92px] md:pt-[66px] xs:pt-[56px] pt-[57px];
+    @apply xl:pb-[116.11px] lg:pb-[94.775px] pb-[24px];
+    .imageWrapper {
+      @apply md:h-[80vh] h-[40vh];
+      @apply xl:mb-[27px] mb-[24px];
+      @apply lg:rounded-[1.5em] rounded-[20px];
+      overflow: hidden;
+    }
+    .mainContainer {
+      @apply flex xs:flex-row flex-col flex-wrap;
+      @apply gap-x-[16px] md:gap-x-0 gap-y-[16px];
+      .left {
+        @apply xs:w-[37%] md:w-[39.6%] xl:w-[39%] w-full flex;
+      }
+      .right {
+        @apply xs:w-[59%] md:w-[60.4%] xl:w-[61%] w-full flex justify-between items-center;
+        .section {
+          @apply flex flex-col ml:flex-row w-full justify-between xs:items-center;
+          @apply xl:py-[20.49px] lg:py-[16.725px] py-[18px];
+          border-bottom: 1px solid $lightestgray;
+          p {
+            &:first-child {
+              font-size: 12px;
+            }
+            &:last-child {
+              @apply text-[16px] lg:text-[14.495px] xl:text-[17.758px];
+            }
+          }
+        }
+      }
+    }
+  }
+  .images {
+    @apply xl:px-[34.15px] lg:px-[27.875px] md:px-[24px] px-[20px];
+    @apply xl:pb-[116.11px] lg:pb-[94.775px] pb-[24px];
+    @apply xl:gap-[20.49px] lg:gap-[16.725px] gap-[16px];
+    @apply flex flex-col xs:flex-row flex-wrap;
+    .image {
+      background: white;
+      @apply w-full;
+      @apply xl:aspect-[1.8/1] md:aspect-[1.6/1] sm:aspect-[1.9/1] xs:aspect-[1.7/1] aspect-[1.15/1];
+      @apply rounded-[12px] ml:rounded-[20px] lg:rounded-[1.5em];
+    }
+    .next {
+      padding: 10px;
+      .header {
+        @apply p-[16px] md:p-[18.74px] lg:p-[22.3px] xl:p-[27.32px];
+        p {
+          @apply text-[28px] xs:text-[32px] md:text-[39.48px] lg:text-[44.6px] xl:text-[54.64px];
+          &:first-child {
+            font-size: 14px;
+          }
+        }
+      }
+      .image {
+        @apply xs:h-[350px];
+        @apply xl:rounded-[13px] lg:rounded-[11.15px] ml:rounded-[16px] rounded-[8px];
+        overflow: hidden;
+      }
+    }
+  }
+}

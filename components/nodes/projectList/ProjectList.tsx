@@ -23,8 +23,14 @@ const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
             }`}
             onMouseOver={() => setType("open")}
             onMouseLeave={() => setType("none")}
+            onClick={() => setType("none")}
           >
-            <Link href="">
+            <Link
+              href={{
+                pathname: `/projects/[id]`,
+                query: { id: details.id },
+              }}
+            >
               <div className={styles.details}>
                 <div className={styles.cover}>{details.client}</div>
                 <div className="flex">
@@ -36,7 +42,12 @@ const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
             <Image
               src={details.mainPicture}
               alt={details.client}
-              style={{ objectFit: "cover", height: "101%", width: "100%", zIndex: "-1" }}
+              style={{
+                objectFit: "cover",
+                height: "101%",
+                width: "100%",
+                zIndex: "-1",
+              }}
             />
           </div>
         );

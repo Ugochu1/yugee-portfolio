@@ -6,7 +6,8 @@ import { useCursor } from "@/contexts/CursorProvider";
 import AnimRollup from "../animRollup/AnimRollup";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
-import Contacts from "../contacts/Contacts";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { useContactOpen } from "@/components/layouts/main/MainLayout";
 
 export const socialsStyle = {
   fontSize: "12px",
@@ -24,19 +25,16 @@ export function getOpacity(scrollPos: number, threshold: number) {
   return opacity;
 }
 
-interface NavbarProps {
-  scrollPos: number;
-}
-
-const Navbar: FC<NavbarProps> = ({ scrollPos }) => {
+const Navbar: FC = () => {
+  const scrollPos = useScrollPosition();
   const router = useRouter();
   const { setType } = useCursor();
   const [dropped, setDropped] = useState<boolean>(false);
   const [active, setActive] = useState<string>("");
-  const {ref, inView} = useInView({
-    threshold: 1
-  })
-  const [contactOpen, setContactOpen] = useState<boolean>(false);
+  const { ref, inView } = useInView({
+    threshold: 1,
+  });
+  const { setContactOpen } = useContactOpen();
 
   useEffect(() => {
     if (router.pathname.includes("projects")) {
@@ -48,9 +46,27 @@ const Navbar: FC<NavbarProps> = ({ scrollPos }) => {
     }
   }, [router.pathname]);
 
+  useEffect(() => {
+    let previous = window.innerWidth;
+    var timeout: NodeJS.Timeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const current = window.innerWidth;
+
+        if (
+          (previous >= 1024 && current < 1024) ||
+          (previous < 1024 && current >= 1024)
+        ) {
+          previous = current;
+          router.reload();
+        }
+      }, 200);
+    });
+  }, []);
+
   return (
     <>
-    <Contacts contactOpen={contactOpen} setContactOpen={setContactOpen} />
       <div
         className={
           "fixed left-0 w-full h-[100vh] " +
@@ -98,24 +114,31 @@ const Navbar: FC<NavbarProps> = ({ scrollPos }) => {
               </span>
             </div>
           </Link>
-          <Link href="">
-            <div className="text-center mt-6" onClick={() => setDropped(false)}>
-              <span
-                className={`${styles.link}`}
-                onMouseOver={() => setType("hover")}
-                onMouseLeave={() => setType("none")}
-                onClick={() => setContactOpen(true)}
-              >
-                Contacts
-              </span>
-            </div>
-          </Link>
+          <div
+            className="text-center mt-6"
+            onClick={() => {
+              setContactOpen(true)
+              setDropped(false);
+            }}
+          >
+            <span
+              className={`${styles.link}`}
+              onMouseOver={() => setType("hover")}
+              onMouseLeave={() => setType("none")}
+            >
+              Contact Me
+            </span>
+          </div>
         </div>
         <div className="mt-10">
           <div className="flex flex-col items-center">
             <p className={styles.def}>Social:</p>
             <div className="overflow-hidden" ref={ref}>
-              <div className={`flex mt-3 ${styles.socialDrop} ${inView && styles.inView}`}>
+              <div
+                className={`flex mt-3 ${styles.socialDrop} ${
+                  inView && styles.inView
+                }`}
+              >
                 <Link href="">
                   <AnimRollup
                     style={mobileSocialStyle}
@@ -208,16 +231,14 @@ const Navbar: FC<NavbarProps> = ({ scrollPos }) => {
                 About
               </p>
             </Link>
-            <Link href="">
-              <p
-                className={styles.link}
-                onMouseOver={() => setType("hover")}
-                onMouseLeave={() => setType("none")}
-                onClick={() => setContactOpen(true)}
-              >
-                Contacts
-              </p>
-            </Link>
+            <p
+              className={styles.link}
+              onMouseOver={() => setType("hover")}
+              onMouseLeave={() => setType("none")}
+              onClick={() => setContactOpen(true)}
+            >
+              Contact Me
+            </p>
           </div>
           {scrollPos <= 450 && (
             <div className={styles.socials}>
