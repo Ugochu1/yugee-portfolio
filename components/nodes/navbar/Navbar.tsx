@@ -71,7 +71,7 @@ const Navbar: FC = () => {
         className={
           "fixed left-0 w-full h-[100vh] " +
           styles.drop +
-          ` ${dropped ? "top-0" : "top-[-100vh]"}`
+          ` ${dropped ? "top-0" : "top-[-150vh]"}`
         }
       >
         <div>

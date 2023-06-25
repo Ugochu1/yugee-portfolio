@@ -20,7 +20,7 @@
       .right {
         @apply xs:w-[59%] md:w-[60.4%] xl:w-[61%] w-full flex justify-between items-center;
         .section {
-          @apply flex flex-col ml:flex-row w-full justify-between xs:items-center;
+          @apply flex flex-col ml:flex-row w-full justify-between ml:items-center;
           @apply xl:py-[20.49px] lg:py-[16.725px] py-[18px];
           border-bottom: 1px solid $lightestgray;
           p {
