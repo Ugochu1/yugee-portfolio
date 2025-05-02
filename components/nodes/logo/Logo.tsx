@@ -10,7 +10,7 @@ const Logo: FC<{ scrollPos: number }> = ({ scrollPos }) => {
 
   return (
     <>
-      <div className={styles.logo + " lg:hidden"}>
+      <div className={styles.logo + ""}>
         {/* {JSON.stringify(type)} */}
         <Link href="/">
           <div
@@ -18,11 +18,11 @@ const Logo: FC<{ scrollPos: number }> = ({ scrollPos }) => {
             onMouseOver={() => setType("hover")}
             onMouseLeave={() => setType("none")}
           >
-            <div className={styles.alpha}>J</div>
-            <div className={styles.alpha}>a</div>
-            <div className={styles.alpha}>m</div>
-            <div className={styles.alpha}>e</div>
-            <div className={styles.alpha + " mr-1"}>s</div>
+            <div className={styles.alpha}>Ug</div>
+            <div className={styles.alpha}>oc</div>
+            <div className={styles.alpha}>hu</div>
+            <div className={styles.alpha}>kw</div>
+            <div className={styles.alpha + " mr-1"}>u</div>
             <div className={styles.alpha}>O</div>
             <div className={styles.alpha}>l</div>
             <div className={styles.alpha}>i</div>
@@ -31,94 +31,7 @@ const Logo: FC<{ scrollPos: number }> = ({ scrollPos }) => {
             <div className={styles.alpha}>a</div>
           </div>
         </Link>
-        <div className={styles.location}>Birmingham, England</div>
       </div>
-      {scrollPos <= 400 && (
-        <div className={styles.logo + " hidden lg:block"}>
-          {/* {JSON.stringify(type)} */}
-          <Link href="/">
-            <div
-              className={styles.main_logo}
-              onMouseOver={() => setType("hover")}
-              onMouseLeave={() => setType("none")}
-            >
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 200)}` }}
-              >
-                J
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                a
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                m
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 200)}` }}
-              >
-                e
-              </div>
-              <div
-                className={styles.alpha + " mr-1"}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                s
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 200)}` }}
-              >
-                O
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                l
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                i
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 200)}` }}
-              >
-                n
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                y
-              </div>
-              <div
-                className={styles.alpha}
-                style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-              >
-                a
-              </div>
-            </div>
-          </Link>
-
-          <div
-            className={styles.location + " hidden lg:block"}
-            style={{ opacity: `${getOpacity(scrollPos, 400)}` }}
-          >
-            Birmingham, England
-          </div>
-        </div>
-      )}
     </>
   );
 };

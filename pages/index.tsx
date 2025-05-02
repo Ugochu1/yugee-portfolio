@@ -83,7 +83,7 @@ const Home: NextPageWithLayout = () => {
         <ProjectList data={projectData} firstexpand={true} />
       </div>
       <div className="md:h-[40px] h-[24px] w-full bg-[#f5f5f5]"></div>
-      <div className="md:px-8 px-5 bg-[#f5f5f5]">
+      <div className="md:px-8 px-5 bg-[#f5f5f5] flex justify-left">
         <Link href="/projects">
           <AnimRollup
             style={{
@@ -153,13 +153,7 @@ const Home: NextPageWithLayout = () => {
           </div>
         </div>
       </div>
-      {/* <div className="hidden lg:block"> */}
-      <div className={styles.workspace} ref={workspaceRef}>
-        <div
-          className={styles.bg}
-          style={{ transform: `scale3d(${getScale()}, ${getScale()}, 1)` }}
-        ></div>
-      </div>
+
       <div className={`${styles.section}`}>
         <div
           className={`${styles.laurelSection} ${inView2 && styles.inView}`}

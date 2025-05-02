@@ -1,41 +1,6 @@
 @import "../../styles/colors";
 @import "../../styles/mixins";
 
-.drop {
-  z-index: 8;
-  @apply flex pt-[150px] items-center flex-col lg:hidden;
-  transition: 700ms ease-in-out;
-  background-color: #f5f5f5;
-
-  .socialDrop {
-    transform: translateY(30px);
-    transition: 500ms ease-in-out;
-    transition-delay: 250ms;
-    &.inView {
-      transform: translateY(0px);
-    }
-  }
-
-  .def{
-    color: $lighterdarkgray;
-    @apply text-xs mb-0.5;
-  }
-  
-  .link {
-    @apply text-[20px];
-    padding: 8px 20px;
-    font-weight: 400;
-    text-align: center;
-    // @include reduceFontHeight;
-    &.active {
-      background-color: black;
-      color: white;
-      border-radius: 50em;
-      // @apply flex justify-center items-center;
-    }
-  }
-}
-
 .navbar {
   // padding: 24px 30px;
   @apply lg:py-[24px] lg:px-[30px] py-[4px] px-[20px] md:py-[8px] md:px-[25px];
@@ -75,15 +40,16 @@
   }
 
   .navigation {
-    @apply flex bg-white;
+    @apply flex lg:bg-white/50 flex-col items-center lg:flex-row space-y-3 lg:space-y-0;
     padding: 4px;
     font-size: 12.5px;
     border-radius: 50em;
     color: $darkgray;
     backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.5);
+    // background-color: rgba(255, 255, 255, 0.5);
     .link {
-      padding: 8px 16px;
+      @apply text-base lg:text-sm;
+      padding: 8px 20px;
       font-weight: 400;
       cursor: pointer;
       &.active {
@@ -98,7 +64,7 @@
   .socials {
     .def{
       color: $lighterdarkgray;
-      @apply  mb-0.5 text-xs;
+      @apply  text-sm mb-1 lg:mb-0.5 lg:text-xs;
     }
   }
 }

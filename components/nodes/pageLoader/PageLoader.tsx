@@ -26,9 +26,8 @@ const PageLoader: FC<{ setPageLoad: (cv: boolean) => void }> = ({
       {/* {JSON.stringify(height)} */}
       <div style={{ overflow: "hidden", height: `${height}px` }}>
         <div className={styles.name} ref={containerRef}>
-          James Olinya
+          Ugochukwu Olinya
         </div>
-        {/* <div className={styles.nametwo}>James Olinya</div> */}
       </div>
     </div>
   );
