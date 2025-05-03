@@ -11,6 +11,9 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useRouter } from "next/router";
+import DisplayPic from "../public/IMG_1283-removebg-preview.png";
+import Image from "next/image";
+import { annotate, annotationGroup } from "rough-notation";
 
 export const buttonStyle = {
   borderRadius: "700px",
@@ -27,7 +30,6 @@ const Home: NextPageWithLayout = () => {
   const { setType } = useCursor();
   const scrollPos = useScrollPosition();
   const workspaceRef = useRef<HTMLDivElement>(null);
-  const [divTop, setDivTop] = useState<number>(0);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -38,45 +40,50 @@ const Home: NextPageWithLayout = () => {
   });
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   const router = useRouter();
-
-  useEffect(() => {
-    function getDivTop() {
-      workspaceRef.current &&
-        setDivTop(
-          workspaceRef.current.offsetTop - window.innerHeight
-        );
-    }
-    getDivTop(); // call the function initially
-    window.addEventListener("resize", getDivTop);
-  }, []);
-
-  const getScale = (): number => {
-    return 1 + (scrollPos - divTop) / divTop / 2.5;
-  };
+  const userFriendlyAnnotate = useRef<HTMLElement>(null);
+  const seamLessAnnotate = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setPageLoaded(true);
+    const a1 = annotate(userFriendlyAnnotate.current as HTMLElement, {
+      type: "highlight",
+      color: "yellow"
+    });
+    const a2 = annotate(seamLessAnnotate.current as HTMLElement, {
+      type: "box",
+      color: "blue"
+    });
+    const ag = annotationGroup([a1, a2]);
+    ag.show();
   }, []);
 
   return (
     <>
-      <div className={styles.intro}>
-        <div className={styles.awards_and_titles}>
-          <div className={styles.info}>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cupiditate odit autem id quas, assumenda a animi at hic modi
-              doloremque et vitae numquam incidunt, asperiores explicabo beatae
-              iste quae est?
-            </div>
-            <div className="flex md:justify-between mt-5 items-center">
-              <div className="mr-1">Last updated:</div>
-              <div>06 - 03 - 2023</div>
-            </div>
+      <div className={styles.landing}>
+        <div className={styles.writeup}>
+          <div className="font-bold">A little more...</div>
+          <div className="lg:min-w-[300px] lg:w-2/3 w-full text-justify">
+            I build fast, <span ref={userFriendlyAnnotate}>user-friendly</span>{" "}
+            applications across web, mobile, and everything in between. From
+            polished frontends to robust backend systems, I create{" "}
+            <span ref={seamLessAnnotate}>seamless experiences</span> where every
+            piece fits perfectly.
           </div>
         </div>
-        <div className={styles.description}>
-          Fullstack Web and Mobile Developer based in Birmingham.
+        <div className={styles.intro}>
+          <div className={styles.imageDisplay}>
+            <Image
+              src={DisplayPic}
+              alt="Display Image"
+              className={styles.imageBackground}
+            />
+          </div>
+          <div>
+            <div className="text-lg lg:text-2xl">Hi there, I&apos;m a</div>
+            <div className="text-5xl lg:text-6xl font-bold">
+              Full-Stack Web and Mobile Developer.
+            </div>
+          </div>
         </div>
       </div>
       <div className={styles.projectSection}>

@@ -55,7 +55,7 @@ const Navbar: FC = () => {
         <div
           className={`lg:flex items-center bg-inherit justify-between flex-1 absolute ${
             dropped ? "top-0" : "top-[-100vh]"
-          } lg:static h-screen lg:h-auto inset-0 pt-40 lg:pt-0 space-y-10 lg:space-y-0 transition-all`}
+          } lg:static h-screen lg:h-auto inset-0 pt-40 lg:pt-0 space-y-10 lg:space-y-0 transition-all duration-500`}
         >
           <div className={styles.navigation}>
             <Link href="/">
