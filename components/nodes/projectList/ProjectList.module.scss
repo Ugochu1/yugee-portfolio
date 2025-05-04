@@ -11,7 +11,7 @@
     // height: 379.094px;
     @apply xl:aspect-[1.6/1] md:aspect-[1.5/1] xs:aspect-[1.5/1] sm:aspect-[1.95/1] aspect-[1.2/1];
     cursor: pointer;
-    @apply w-full md:min-w-[38%] md:w-[49%];
+    @apply w-full md:min-w-[38%] md:w-[49%] bg-green-300;
 
     .bgImg {
       position: absolute;

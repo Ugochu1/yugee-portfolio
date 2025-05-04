@@ -21,9 +21,9 @@ const Footer: FC = () => {
           className={`${styles.content} ${inView && styles.inView}`}
           ref={ref}
         >
-          <p>James Olinya</p>
+          <p>Ugochukwu Olinya</p>
           <div className={styles.contact}>
-            <p>Have a nice project?</p>
+            <p>Have a project idea?</p>
             <AnimRollup
               style={{ fontSize: "50px" }}
               onClick={() => setContactOpen(true)}
@@ -39,7 +39,7 @@ const Footer: FC = () => {
                 margin: "10px 5px",
               }}
             >
-              Twitter
+              WhatsApp
             </AnimRollup>
             <AnimRollup
               style={{
@@ -48,7 +48,7 @@ const Footer: FC = () => {
                 margin: "10px 5px",
               }}
             >
-              Instagram
+              Github
             </AnimRollup>
             <AnimRollup
               style={{
@@ -57,16 +57,7 @@ const Footer: FC = () => {
                 margin: "10px 5px",
               }}
             >
-              Behance
-            </AnimRollup>
-            <AnimRollup
-              style={{
-                ...buttonStyle,
-                border: "1px solid #f5f5f5",
-                margin: "10px 5px",
-              }}
-            >
-              Dribbble
+              LinkedIn
             </AnimRollup>
           </div>
         </div>

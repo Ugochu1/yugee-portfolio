@@ -46,15 +46,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     setContactOpen,
   };
 
-  useEffect(() => {
-    setPageLoad(true);
-    setTimeout(() => {}, 200);
-  }, [router.pathname]);
-
   return (
     <div className={styles.global}>
       <Contacts contactOpen={contactOpen} setContactOpen={setContactOpen} />
-      {pageLoad && <PageLoader setPageLoad={setPageLoad} />}
       <ContactContext.Provider value={contactContext}>
         <Navbar />
         <Cursor />

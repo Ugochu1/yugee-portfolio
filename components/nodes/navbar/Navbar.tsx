@@ -89,35 +89,25 @@ const Navbar: FC = () => {
               Contact Me
             </p>
           </div>
-          <div
-            className={
-              styles.socials + (scrollPos > 400 ? " pointer-events-none" : "")
-            }
-          >
-            <div className="flex flex-col items-center lg:items-end">
-              <p
-                className={styles.def}
-              >
-                Social:
-              </p>
-              <div className="flex">
-                <Link href="">
-                  <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
-                    WHATSAPP
-                  </AnimRollup>
-                </Link>
-                <Link href="">
-                  {/* {JSON.stringify(scrollPos)} */}
-                  <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
-                    GITHUB
-                  </AnimRollup>
-                </Link>
-                <Link href="">
-                  <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
-                    IN
-                  </AnimRollup>
-                </Link>
-              </div>
+          <div className="flex flex-col items-center lg:items-end">
+            <p className={styles.def}>Social:</p>
+            <div className="flex">
+              <Link href="">
+                <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
+                  WHATSAPP
+                </AnimRollup>
+              </Link>
+              <Link href="">
+                {/* {JSON.stringify(scrollPos)} */}
+                <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
+                  GITHUB
+                </AnimRollup>
+              </Link>
+              <Link href="">
+                <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
+                  IN
+                </AnimRollup>
+              </Link>
             </div>
           </div>
         </div>

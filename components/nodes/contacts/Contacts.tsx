@@ -95,7 +95,7 @@ const Contacts: FC<ContactInterface> = ({ contactOpen, setContactOpen }) => {
         <div className={styles.socials}>
           <AnimRollup style={handleStyle}>Instagram</AnimRollup>
           <AnimRollup style={handleStyle}>Twitter</AnimRollup>
-          <AnimRollup style={handleStyle}>olinyajames@gmail.com</AnimRollup>
+          <AnimRollup style={handleStyle}>olinyaugochukwu1@gmail.com</AnimRollup>
         </div>
       </div>
     </>

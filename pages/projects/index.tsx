@@ -11,9 +11,6 @@ const Projects: NextPageWithLayout = () => {
   const { setType } = useCursor();
   const [dataArray, setDataArray] = useState<ProjectData[]>();
   const [category, setCategory] = useState<string>("all");
-  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
-
-  useEffect(() => setPageLoaded(true), []);
 
   useEffect(() => {
     if (category === "all") {
@@ -71,7 +68,7 @@ const Projects: NextPageWithLayout = () => {
           </div>
         </div>
       </div>
-      {pageLoaded && <Footer />}
+      <Footer />
     </>
   );
 };
