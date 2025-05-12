@@ -40,6 +40,9 @@ const Home: NextPageWithLayout = () => {
   const userFriendlyAnnotate = useRef<HTMLElement>(null);
   const seamLessAnnotate = useRef<HTMLElement>(null);
   const unnRef = useRef<HTMLElement>(null);
+  const aboutMeClean = useRef<HTMLElement>(null);
+  const aboutMeScalable = useRef<HTMLElement>(null);
+  const aboutMeReusable = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setPageLoaded(true);
@@ -60,7 +63,20 @@ const Home: NextPageWithLayout = () => {
       const a3 = annotate(unnRef.current as HTMLElement, {
         type: "underline",
       });
-      a3.show();
+      const a4 = annotate(aboutMeClean.current as HTMLElement, {
+        type: "highlight",
+        color: "pink"
+      });
+      const a6 = annotate(aboutMeScalable.current as HTMLElement, {
+        type: "highlight",
+        color: "yellow"
+      });
+      const a5 = annotate(aboutMeReusable.current as HTMLElement, {
+        type: "highlight",
+        color: "lightblue"
+      });
+      const ag = annotationGroup([a3, a4, a5, a6]);
+      ag.show();
     }
   }, [inView]);
 
@@ -84,7 +100,7 @@ const Home: NextPageWithLayout = () => {
           <div>
             <div className="text-lg lg:text-2xl">
               Hi there. I&apos;m{" "}
-              <span className="text-blue-600">Ugochukwu</span>, a
+              <span className="text-blue-600 font-bold">Ugochukwu</span>, a
             </div>
             <div className="text-5xl lg:text-6xl font-bold">
               Full-Stack Web and Mobile Developer.
@@ -93,7 +109,7 @@ const Home: NextPageWithLayout = () => {
         </div>
       </div>
       <div className={styles.projectSection}>
-        
+        <ProjectList data={projectData.slice(0, 2)} />
       </div>
       <div className="md:px-8 px-5 bg-[#f5f5f5] flex justify-left">
         <Link href="/projects">
@@ -151,14 +167,15 @@ const Home: NextPageWithLayout = () => {
               fast. <br />
               <br />
               These experiences have also deepened my appreciation for solid
-              engineering principles: clean architecture, thoughtful
-              abstractions, and scalable code. I&apos;ve grown to love not just
+              engineering principles:{" "}
+              <span ref={aboutMeClean}>clean</span> <span>architecture</span>,{" "}{" "}
+              <span ref={aboutMeReusable}>thoughtful</span> <span>abstractions</span>, and{" "}{" "}
+              <span ref={aboutMeScalable}>scalable</span> <span>code.</span> I&apos;ve grown to love not just
               solving problems, but solving them with clarity and purpose.
             </p>
           </div>
         </div>
         <div className={`${styles.section}`}>
-          {/* <div className="md:px-8 px-5">My Approach To Work</div> */}
           <div
             className={`${styles.laurelSection} ${inView2 && styles.inView}`}
             ref={ref2}

@@ -70,6 +70,10 @@
   }
 }
 
+.projectSection {
+  @apply md:px-8 px-5;
+}
+
 .section {
   @apply mb-[12.24px] xs:mb-[15.93px] sm:mb-[21.09px] md:mb-[26.94px] lg:mb-[32.88px] xl:mb-[40.98px];
   p {
