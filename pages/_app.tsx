@@ -1,9 +1,7 @@
 import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { ReactNode, useEffect } from "react";
-import CursorProvider from "@/contexts/CursorProvider";
-import { useRouter } from "next/router";
+import { ReactNode } from "react";
 import { Manrope } from "next/font/google";
 
 const manrope = Manrope({ subsets: ["latin"] });
@@ -21,7 +19,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <main className={manrope.className}>
-      <CursorProvider>{getLayout(<Component {...pageProps} />)}</CursorProvider>
+      {getLayout(<Component {...pageProps} />)}
     </main>
   );
 }

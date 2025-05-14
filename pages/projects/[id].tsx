@@ -1,6 +1,4 @@
-import MainLayout, {
-  usePageLoader,
-} from "@/components/layouts/main/MainLayout";
+import MainLayout from "@/components/layouts/main/MainLayout";
 import { NextPageWithLayout } from "../_app";
 import {
   ProjectData,
@@ -11,36 +9,21 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import styles from "./ProjectId.module.scss";
 import Footer from "@/components/nodes/footer/Footer";
-import Image from "next/image";
 import Link from "next/link";
 import AnimRollup from "@/components/nodes/animRollup/AnimRollup";
-import { useCursor } from "@/contexts/CursorProvider";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import ImageDisplay from "@/components/nodes/imageDisplay/ImageDisplay";
+import VideoDisplay from "@/components/nodes/videoDisplay/VideoDisplay";
 
 const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
   projectData,
 }) => {
-  const { setType } = useCursor();
-  const [scale, setScale] = useState<1 | 1.1>(1);
-  const router = useRouter();
-  const { setPageLoad } = usePageLoader();
-
-  useEffect(() => {
-    setPageLoad(true);
-    setTimeout(() => {}, 200);
-  }, [projectData]);
 
   return (
     <>
       <div className={styles.pageWrapper}>
         <div className={styles.details}>
           <div className={styles.imageWrapper}>
-            <Image
-              src={projectData[0].mainPicture}
-              alt="main picture"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <ImageDisplay src={projectData[0].mainPicture} />
           </div>
           <div className={styles.mainContainer}>
             <div className={styles.left + " text-[12px]"}>
@@ -61,13 +44,19 @@ const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
                     .join(", ") || "None"}
                 </p>
               </div>
-              <div>
-                <Link href={projectData[0].liveLink}>
-                  <AnimRollup>
-                    <span className="">View Live Version</span> &rarr;
-                  </AnimRollup>
-                </Link>
-              </div>
+              {projectData[0].liveLink && (
+                <div>
+                  <Link
+                    href={projectData[0].liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <AnimRollup>
+                      <span className="">View Live Version</span> &rarr;
+                    </AnimRollup>
+                  </Link>
+                </div>
+              )}
             </div>
             <div className="w-full xs:h-[56px] h-[16px]"></div>
             <div className={styles.left}>
@@ -95,67 +84,39 @@ const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
                 </div>
               </div>
             </div>
-            <div className={styles.left}></div>
-            <div
-              className={
-                styles.right +
-                " xl:mt-[47.81px] lg:mt-[39.025px] xs:mt-[30px] mt-[22px] text-[20px] leading-7"
-              }
-            >
-              {projectData[0].client} is a fintech platform that allows users to
-              manage their finances in an intuitive and hassle-free manner. The
-              platform offers a range of services including budget tracking,
-              bill payments, investment management, and financial advice.
-              Overall, the goal of the SavvyFin platform is to provide a
-              user-friendly and customizable solution for managing personal
-              finances, investments, and business finances. The platform aims to
-              simplify financial management and empower users to make informed
-              financial decisions.
+            {/* <div className={styles.left}></div> */}
+            <div className="relative xl:mt-[47.81px] lg:mt-[39.025px] xs:mt-[30px] mt-[22px] text-justify max-w-[600px] w-full mx-auto">
+              {/* <span className="text-8xl absolute italic -top-10 -left-7 text-gray-700">
+                &quot;
+              </span> */}
+              {projectData[0].description.map((des, i) => {
+                return (
+                  <div key={i}>
+                    <p className="font-semibold">{des}</p>
+                    {i < projectData[0].description.length - 1 && <br />}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
+
         <div className={styles.images}>
-          {projectData[0].pictures.map((_, index) => {
-            return <div key={index} className={styles.image}></div>;
-          })}
-          <div
-            className="bg-white w-full rounded-[12px] ml:rounded-[20px] lg:rounded-[1.5em] cursor-pointer"
-            onMouseOver={() => {
-              setType("open");
-              setScale(1.1);
-            }}
-            onMouseLeave={() => {
-              setType("none");
-              setScale(1);
-            }}
-          >
-            <Link
-              href={{
-                pathname: `/projects/[id]`,
-                query: { ...router.query, id: projectData[1].id },
-              }}
-            >
-              <div className={styles.next}>
-                <div className={styles.header}>
-                  <p>Next Project</p>
-                  <p>{projectData[1].client}</p>
-                </div>
-                <div className={styles.image}>
-                  <Image
-                    src={projectData[1].mainPicture}
-                    alt="next"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      scale: `${scale}`,
-                      transition: "1s",
-                    }}
-                  />
-                </div>
+          {projectData[0].videos?.map((video, index) => {
+            return (
+              <div key={index} className={styles.image}>
+                {/* <video className="w-full h-full object-cover" src={video} poster="/liveness-main-thumbnail.jpg" autoPlay muted loop playsInline /> */}
+                <VideoDisplay src={video} poster="liveness-main.png" />
               </div>
-            </Link>
-          </div>
+            );
+          })}
+          {projectData[0].pictures?.map((pic_name, index) => {
+            return (
+              <div key={index} className={styles.image}>
+                <ImageDisplay src={pic_name} />
+              </div>
+            );
+          })}
         </div>
       </div>
       <Footer />

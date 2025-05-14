@@ -6,7 +6,7 @@
     @apply lg:pt-[92px] md:pt-[66px] xs:pt-[56px] pt-[57px];
     @apply xl:pb-[116.11px] lg:pb-[94.775px] pb-[24px];
     .imageWrapper {
-      @apply md:h-[80vh] h-[40vh];
+      @apply lg:h-[90vh] h-[70vh];
       @apply xl:mb-[27px] mb-[24px];
       @apply lg:rounded-[1.5em] rounded-[20px];
       overflow: hidden;
@@ -25,10 +25,10 @@
           border-bottom: 1px solid $lightestgray;
           p {
             &:first-child {
-              font-size: 12px;
+              @apply text-sm;
             }
             &:last-child {
-              @apply text-[16px] lg:text-[14.495px] xl:text-[17.758px];
+              @apply font-semibold;
             }
           }
         }
@@ -43,25 +43,9 @@
     .image {
       background: white;
       @apply w-full;
-      @apply xl:aspect-[1.8/1] md:aspect-[1.6/1] sm:aspect-[1.9/1] xs:aspect-[1.7/1] aspect-[1.15/1];
-      @apply rounded-[12px] ml:rounded-[20px] lg:rounded-[1.5em];
-    }
-    .next {
-      padding: 10px;
-      .header {
-        @apply p-[16px] md:p-[18.74px] lg:p-[22.3px] xl:p-[27.32px];
-        p {
-          @apply text-[28px] xs:text-[32px] md:text-[39.48px] lg:text-[44.6px] xl:text-[54.64px];
-          &:first-child {
-            font-size: 14px;
-          }
-        }
-      }
-      .image {
-        @apply xs:h-[350px];
-        @apply xl:rounded-[13px] lg:rounded-[11.15px] ml:rounded-[16px] rounded-[8px];
-        overflow: hidden;
-      }
+      @apply lg:h-[90vh] h-[70vh];
+      // @apply xl:aspect-[1.8/1] md:aspect-[2/1] sm:aspect-[1.9/1] xs:aspect-[1.7/1] aspect-[1.15/1];
+      @apply rounded-[12px] ml:rounded-[20px] lg:rounded-[1.5em] overflow-hidden;
     }
   }
 }

@@ -1,55 +1,29 @@
 @import "../components/styles/colors";
 
-.workspace {
-  @apply xl:aspect-[2.3/1] lg:aspect-[2/1] md:aspect-[2.1/1] xs:aspect-[2/1] aspect-[1.8/1] p-0 m-0;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .bg {
-    position: absolute;
-    inset: 0;
-    // width: 100%;
-    margin: auto;
-    background-image: url("../public/workspace.webp");
-    background-size: cover;
-    background-position: center center;
-    vertical-align: middle;
-    display: inline-block;
-    transform-style: preserve-3d;
-    transition: all linear .1s;
-  }
-}
 
 .landing {
-  @apply min-h-screen flex flex-col-reverse lg:flex-row py-16;
+  @apply min-h-screen flex flex-col-reverse md:flex-row py-10;
   @apply md:px-8 px-5;
   .writeup {
-    @apply lg:w-[39%] min-h-full flex flex-col justify-end space-y-3 lg:mt-0 mt-5 text-center lg:text-left;
+    @apply md:w-[39%] min-h-full flex flex-col justify-end space-y-3 lg:mt-0 mt-5 lg:text-left;
     
   }
   .intro {
-    @apply min-h-full flex flex-col justify-end flex-1 space-y-10 text-center lg:text-left;
+    @apply min-h-full flex flex-col justify-end flex-1 space-y-5 lg:text-left;
     div {
       &:first-child {
         color: $lighterdarkgray
       }
     }
     .imageBackground {
-      @apply w-[300px] h-[300px] lg:w-[350px] bg-blue-500 lg:h-[350px] mx-auto lg:mx-0;
-      border-radius: 49% 51% 41% 59% / 21% 18% 82% 79% ;
-      background-image: url("../public/IMG_1283-removebg-preview.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
+      @apply w-[300px] h-[300px] md:h-[325px] md:w-[325px] bg-blue-500 mx-auto lg:mx-0 overflow-hidden;
+      border-radius: 56% 44% 55% 45% / 59% 49% 51% 41% ;
     }
   }
 }
 
 .about {
-  @apply md:pr-8 md:pl-0;
+  @apply px-5 md:pr-8 xs:pl-0;
   @apply xs:w-[60%] md:w-[60.5%] w-full;
   transform: translateY(50px);
   opacity: 0;
@@ -59,8 +33,7 @@
     opacity: 1;
   }
   h2 {
-    @apply lg:text-4xl text-3xl;
-    @apply sm:leading-[40px] leading-[35px] lg:leading-[42px];
+    @apply md:text-3xl text-2xl;
   }
   .description {
     @apply md:flex md:items-end md:justify-between;
@@ -75,7 +48,7 @@
 }
 
 .section {
-  @apply mb-[12.24px] xs:mb-[15.93px] sm:mb-[21.09px] md:mb-[26.94px] lg:mb-[32.88px] xl:mb-[40.98px];
+  @apply mb-[12.24px] xs:mb-[15.93px] sm:mb-[21.09px] md:mb-[26.94px] lg:mb-[32.88px] xl:mb-[40.98px] text-sm;
   p {
     &:first-child {
       color: $lighterdarkgray;
@@ -92,11 +65,11 @@
       transform: translateY(0);
     }
     .header {
-      @apply xs:w-[39.5%] xl:w-[39%];
+      @apply xs:w-[39%] xl:w-[39%];
       @apply font-semibold mb-7;
     }
     .details {
-      @apply xs:w-[60.5%] xl:w-[61%];
+      @apply xs:w-[61%] xl:w-[61%];
       .method {
         @apply flex flex-col md:flex-row;
         @apply xl:py-[20.49px] lg:py-[16.725px] py-[18px];
@@ -107,7 +80,7 @@
           @apply mb-3;
         }
         p {
-          @apply md:w-[51%] w-full text-justify;
+          @apply md:w-[51%] w-full text-justify text-base;
           // @apply xl:text-[13.66px] lg:text-[11.15px] text-[12.8px];
           // @apply xl:leading-[20.49px] lg:leading-[16.725px] leading-[19.2px];
         }

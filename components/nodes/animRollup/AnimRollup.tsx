@@ -1,6 +1,5 @@
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./AnimRollup.module.scss";
-import { useCursor } from "@/contexts/CursorProvider";
 // import { useInView } from "react-intersection-observer";
 
 interface Props {
@@ -14,7 +13,6 @@ const AnimRollup: FC<Props> = ({ children, style, className, onClick }) => {
   const mainDiv = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState<number | undefined>(0);
   const [pos, setPos] = useState<number | undefined>(0);
-  const { setType } = useCursor();
 
   useEffect(() => {
     setHeight(mainDiv.current?.scrollHeight);
@@ -24,17 +22,14 @@ const AnimRollup: FC<Props> = ({ children, style, className, onClick }) => {
     if (onClick) {
       onClick();
     }
-    setType("none");
   }
 
   return (
     <div
       onMouseEnter={() => {
-        setType("hover");
         setPos(height);
       }}
       onMouseLeave={() => {
-        setType("none");
         setPos(0);
       }}
       style={style}

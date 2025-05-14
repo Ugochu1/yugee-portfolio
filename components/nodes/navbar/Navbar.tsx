@@ -2,10 +2,8 @@ import { FC, useState, useEffect } from "react";
 import styles from "./Navbar.module.scss";
 import Logo from "../logo/Logo";
 import Link from "next/link";
-import { useCursor } from "@/contexts/CursorProvider";
 import AnimRollup from "../animRollup/AnimRollup";
 import { useRouter } from "next/router";
-import { useInView } from "react-intersection-observer";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useContactOpen } from "@/components/layouts/main/MainLayout";
 
@@ -18,12 +16,8 @@ export function getOpacity(scrollPos: number, threshold: number) {
 const Navbar: FC = () => {
   const scrollPos = useScrollPosition();
   const router = useRouter();
-  const { setType } = useCursor();
   const [dropped, setDropped] = useState<boolean>(false);
   const [active, setActive] = useState<string>("");
-  const { ref, inView } = useInView({
-    threshold: 1,
-  });
   const { setContactOpen } = useContactOpen();
 
   useEffect(() => {
@@ -63,8 +57,6 @@ const Navbar: FC = () => {
                 className={`${styles.link}  ${
                   active === "home" && styles.active
                 }`}
-                onMouseOver={() => setType("hover")}
-                onMouseLeave={() => setType("none")}
               >
                 Home
               </p>
@@ -74,36 +66,26 @@ const Navbar: FC = () => {
                 className={`${styles.link}  ${
                   active === "projects" && styles.active
                 }`}
-                onMouseOver={() => setType("hover")}
-                onMouseLeave={() => setType("none")}
               >
                 Projects
               </p>
             </Link>
-            <p
-              className={styles.link}
-              onMouseOver={() => setType("hover")}
-              onMouseLeave={() => setType("none")}
-              onClick={() => setContactOpen(true)}
-            >
-              Contact Me
-            </p>
           </div>
-          <div className="flex flex-col items-center lg:items-end">
+          <div className="flex flex-col lg:items-end items-center">
             <p className={styles.def}>Social:</p>
             <div className="flex">
-              <Link href="">
+              <Link href="mailto:olinyaugochukwu1@gmail.com">
                 <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
-                  WHATSAPP
+                  EMAIL
                 </AnimRollup>
               </Link>
-              <Link href="">
+              <Link href="https://github.com/Ugochu1" target="_blank" rel="noopener noreferrer">
                 {/* {JSON.stringify(scrollPos)} */}
                 <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
                   GITHUB
                 </AnimRollup>
               </Link>
-              <Link href="">
+              <Link href="https://www.linkedin.com/in/olinya-ugochukwu-8a5b7a252/" target="_blank" rel="noopener noreferrer">
                 <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
                   IN
                 </AnimRollup>

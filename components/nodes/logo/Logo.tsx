@@ -1,12 +1,9 @@
 import { FC, useState } from "react";
 import styles from "./Logo.module.scss";
 import Link from "next/link";
-import { useCursor } from "@/contexts/CursorProvider";
 import { getOpacity } from "../navbar/Navbar";
 
 const Logo: FC<{ scrollPos: number }> = ({ scrollPos }) => {
-  // const [innerWidth, setInnerWidth] = useState(document.body.clientWidth);
-  const { type, setType } = useCursor();
 
   return (
     <>
@@ -15,8 +12,6 @@ const Logo: FC<{ scrollPos: number }> = ({ scrollPos }) => {
         <Link href="/">
           <div
             className={styles.main_logo}
-            onMouseOver={() => setType("hover")}
-            onMouseLeave={() => setType("none")}
           >
             <div className={styles.alpha}>Ug</div>
             <div className={styles.alpha}>oc</div>

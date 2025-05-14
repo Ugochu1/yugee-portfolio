@@ -1,16 +1,15 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styles from "./Footer.module.scss";
 import AnimRollup from "../animRollup/AnimRollup";
 import { buttonStyle } from "@/pages";
 import { useInView } from "react-intersection-observer";
-import { useContactOpen } from "@/components/layouts/main/MainLayout";
+import Link from "next/link";
 
 const Footer: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
-  const { setContactOpen } = useContactOpen();
 
   return (
     <>
@@ -24,41 +23,54 @@ const Footer: FC = () => {
           <p>Ugochukwu Olinya</p>
           <div className={styles.contact}>
             <p>Have a project idea?</p>
-            <AnimRollup
-              style={{ fontSize: "50px" }}
-              onClick={() => setContactOpen(true)}
-            >
-              Get in touch
-            </AnimRollup>
+            <Link href="mailto:olinyaugochukwu1@gmail.com">
+              <AnimRollup style={{ fontSize: "50px" }}>Get in touch</AnimRollup>
+            </Link>
           </div>
           <div className={styles.socials}>
-            <AnimRollup
-              style={{
-                ...buttonStyle,
-                border: "1px solid #f5f5f5",
-                margin: "10px 5px",
-              }}
+            <Link href="mailto:olinyaugochukwu1@gmail.com">
+              <AnimRollup
+                style={{
+                  ...buttonStyle,
+                  border: "1px solid #f5f5f5",
+                  margin: "10px 5px",
+                }}
+              >
+                Email
+              </AnimRollup>
+            </Link>
+
+            <Link
+              href="https://github.com/Ugochu1"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              WhatsApp
-            </AnimRollup>
-            <AnimRollup
-              style={{
-                ...buttonStyle,
-                border: "1px solid #f5f5f5",
-                margin: "10px 5px",
-              }}
+              <AnimRollup
+                style={{
+                  ...buttonStyle,
+                  border: "1px solid #f5f5f5",
+                  margin: "10px 5px",
+                }}
+              >
+                Github
+              </AnimRollup>
+            </Link>
+
+            <Link
+              href="https://www.linkedin.com/in/olinya-ugochukwu-8a5b7a252/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Github
-            </AnimRollup>
-            <AnimRollup
-              style={{
-                ...buttonStyle,
-                border: "1px solid #f5f5f5",
-                margin: "10px 5px",
-              }}
-            >
-              LinkedIn
-            </AnimRollup>
+              <AnimRollup
+                style={{
+                  ...buttonStyle,
+                  border: "1px solid #f5f5f5",
+                  margin: "10px 5px",
+                }}
+              >
+                LinkedIn
+              </AnimRollup>
+            </Link>
           </div>
         </div>
       </div>

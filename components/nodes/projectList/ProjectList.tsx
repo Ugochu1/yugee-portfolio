@@ -1,9 +1,9 @@
 import { FC } from "react";
 import styles from "./ProjectList.module.scss";
 import { ProjectData } from "@/data/projects_data";
-import Image from "next/image";
-import { useCursor } from "@/contexts/CursorProvider";
 import Link from "next/link";
+import ImageDisplay from "../imageDisplay/ImageDisplay";
+import VideoDisplay from "../videoDisplay/VideoDisplay";
 
 interface ProjectDataProps {
   data: ProjectData[] | undefined;
@@ -11,7 +11,6 @@ interface ProjectDataProps {
 }
 
 const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
-  const { setType } = useCursor();
   return (
     <div className={styles.section}>
       {data?.map((details, index) => {
@@ -21,9 +20,6 @@ const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
             className={`${styles.container} ${
               firstexpand && styles.expandFirst
             }`}
-            onMouseOver={() => setType("open")}
-            onMouseLeave={() => setType("none")}
-            onClick={() => setType("none")}
           >
             <Link
               href={{
@@ -31,24 +27,21 @@ const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
                 query: { id: details.id },
               }}
             >
+              {!details.videos && <ImageDisplay src={details.mainPicture} className="z-[-1]" />}
+              {details.videos && <VideoDisplay src={details.videos[0]} poster={details.mainPicture} className="z-[-1]" />}
+
               <div className={styles.details}>
-                <div className={styles.cover}>{details.client}</div>
                 <div className="flex">
                   <div className={styles.cover}>{details.location}</div>
                   <div className={styles.cover + " ml-2"}>{details.year}</div>
                 </div>
               </div>
+
+              <div className={styles.summary}>
+                <h1>{details.client} &middot; {details.scope}</h1>
+                <p>{details.summary}</p>
+              </div>
             </Link>
-            <Image
-              src={details.mainPicture}
-              alt={details.client}
-              style={{
-                objectFit: "cover",
-                height: "101%",
-                width: "100%",
-                zIndex: "-1",
-              }}
-            />
           </div>
         );
       })}

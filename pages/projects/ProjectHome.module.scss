@@ -2,14 +2,18 @@
 
 .container {
   @apply xl:pt-[150.26px] xl:pb-[70.11px] xl:px-[34.15px] lg:pt-[122.65px] lg:pb-[50.775px] lg:px-[27.875px] md:pt-[88px] md:pb-[72px] md:px-[24px] pt-[88px] sm:pb-[56px] px-[20px] pb-[64px];
-  .header {
-    @apply xl:max-w-[528.016px] lg:max-w-[429.688px] md:max-w-[607.844px] sm:max-w-[684px] xs:max-w-[414px];
-    h1 {
-      @apply xl:text-[54.64px] lg:text-[44.6px] md:text-[38.84px] sm:text-[32px] text-[28px];
-      @apply xl:leading-[60.104px] lg:leading-[49.06px] md:leading-[42.724px] sm:leading-[35.2px] leading-[30.8px];
-      @apply xl:tracking-[-1.6392px] lg:tracking-[-1.338px] md:tracking-[-1.1652px] sm:tracking-[-0.96px] tracking-[-0.84px];
+  .content {
+    @apply space-y-10;
+    .header {
+      @apply xl:max-w-[528.016px] lg:max-w-[429.688px] md:max-w-[607.844px] sm:max-w-[684px] xs:max-w-[414px];
+      h1 {
+        @apply xl:text-[54.64px] lg:text-[44.6px] md:text-[38.84px] sm:text-[32px] text-[28px];
+        @apply xl:leading-[60.104px] lg:leading-[49.06px] md:leading-[42.724px] sm:leading-[35.2px] leading-[30.8px];
+        @apply xl:tracking-[-1.6392px] lg:tracking-[-1.338px] md:tracking-[-1.1652px] sm:tracking-[-0.96px] tracking-[-0.84px];
+      }
     }
   }
+  
   .main {
     .categories {
       @apply my-7;

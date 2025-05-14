@@ -4,16 +4,12 @@ import styles from "./Homepage.module.scss";
 import ProjectList from "@/components/nodes/projectList/ProjectList";
 import { projectData } from "@/data/projects_data";
 import AnimRollup from "@/components/nodes/animRollup/AnimRollup";
-import { useCursor } from "@/contexts/CursorProvider";
 import Footer from "@/components/nodes/footer/Footer";
 import { useInView } from "react-intersection-observer";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
-import { useRouter } from "next/router";
-import DisplayPic from "../public/IMG_1283-removebg-preview.png";
-import Image from "next/image";
 import { annotate, annotationGroup } from "rough-notation";
+import ImageDisplay from "@/components/nodes/imageDisplay/ImageDisplay";
 
 export const buttonStyle = {
   borderRadius: "700px",
@@ -27,7 +23,6 @@ export const buttonStyle = {
 };
 
 const Home: NextPageWithLayout = () => {
-  const { setType } = useCursor();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -36,7 +31,6 @@ const Home: NextPageWithLayout = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   const userFriendlyAnnotate = useRef<HTMLElement>(null);
   const seamLessAnnotate = useRef<HTMLElement>(null);
   const unnRef = useRef<HTMLElement>(null);
@@ -45,7 +39,6 @@ const Home: NextPageWithLayout = () => {
   const aboutMeReusable = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    setPageLoaded(true);
     const a1 = annotate(userFriendlyAnnotate.current as HTMLElement, {
       type: "highlight",
       color: "yellow",
@@ -65,15 +58,15 @@ const Home: NextPageWithLayout = () => {
       });
       const a4 = annotate(aboutMeClean.current as HTMLElement, {
         type: "highlight",
-        color: "pink"
+        color: "pink",
       });
       const a6 = annotate(aboutMeScalable.current as HTMLElement, {
         type: "highlight",
-        color: "yellow"
+        color: "yellow",
       });
       const a5 = annotate(aboutMeReusable.current as HTMLElement, {
         type: "highlight",
-        color: "lightblue"
+        color: "lightblue",
       });
       const ag = annotationGroup([a3, a4, a5, a6]);
       ag.show();
@@ -84,8 +77,8 @@ const Home: NextPageWithLayout = () => {
     <div className="space-y-16">
       <div className={styles.landing}>
         <div className={styles.writeup}>
-          <div className="font-bold">A little more...</div>
-          <div className="lg:min-w-[300px] lg:w-2/3 w-full text-justify">
+          <div className="font-bold text-sm lg:text-base">A little more...</div>
+          <div className="md:min-w-[280px] md:w-[80%] w-full text-justify text-sm lg:text-base">
             I build <span ref={userFriendlyAnnotate}>user-friendly</span>{" "}
             applications across web, mobile, and everything in between. From
             polished frontends to robust backend systems, I create{" "}
@@ -95,24 +88,24 @@ const Home: NextPageWithLayout = () => {
         </div>
         <div className={styles.intro}>
           <div className={styles.imageDisplay}>
-            <div className={styles.imageBackground}></div>
+            <div className={styles.imageBackground}>
+              <ImageDisplay src="display_pic.jpg" />
+            </div>
           </div>
           <div>
-            <div className="text-lg lg:text-2xl">
+            <div className="text-lg lg:text-xl">
               Hi there. I&apos;m{" "}
               <span className="text-blue-600 font-bold">Ugochukwu</span>, a
             </div>
-            <div className="text-5xl lg:text-6xl font-bold">
+            <div className="text-4xl sm:text-5xl lg:text-6xl font-bold">
               Full-Stack Web and Mobile Developer.
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.projectSection}>
-        <ProjectList data={projectData.slice(0, 2)} />
-      </div>
-      <div className="md:px-8 px-5 bg-[#f5f5f5] flex justify-left">
-        <Link href="/projects">
+      <div className={styles.projectSection + " space-y-5"}>
+        <ProjectList data={projectData.slice(0, 3)} firstexpand />
+        <Link href="projects" className="flex justify-left">
           <AnimRollup
             style={{
               ...buttonStyle,
@@ -124,7 +117,7 @@ const Home: NextPageWithLayout = () => {
           </AnimRollup>
         </Link>
       </div>
-      <div className="bg-[#f5f5f5] flex xs:flex-row flex-col-reverse items-start md:justify-end justify-center flex-wrap">
+      <div className="bg-[#f5f5f5] flex xs:flex-row flex-col-reverse items-start md:justify-end justify-center flex-wrap md:space-y-5 lg:space-y-0">
         <div className="w-full xs:w-[40%] md:w-[39.5%] md:px-8 px-5">
           <div className={styles.section}>
             <p>Skills:</p>
@@ -167,11 +160,13 @@ const Home: NextPageWithLayout = () => {
               fast. <br />
               <br />
               These experiences have also deepened my appreciation for solid
-              engineering principles:{" "}
-              <span ref={aboutMeClean}>clean</span> <span>architecture</span>,{" "}{" "}
-              <span ref={aboutMeReusable}>thoughtful</span> <span>abstractions</span>, and{" "}{" "}
-              <span ref={aboutMeScalable}>scalable</span> <span>code.</span> I&apos;ve grown to love not just
-              solving problems, but solving them with clarity and purpose.
+              engineering principles: <span ref={aboutMeClean}>clean</span>{" "}
+              <span>architecture</span>,{" "}
+              <span ref={aboutMeReusable}>thoughtful</span>{" "}
+              <span>abstractions</span>, and{" "}
+              <span ref={aboutMeScalable}>scalable</span> <span>code.</span>{" "}
+              I&apos;ve grown to love not just solving problems, but solving
+              them with clarity and purpose.
             </p>
           </div>
         </div>
@@ -181,7 +176,7 @@ const Home: NextPageWithLayout = () => {
             ref={ref2}
           >
             <div className={styles.header}>
-              <h6>My Approach To Solutions</h6>
+              <h6>My Approach</h6>
             </div>
             <div className={styles.details}>
               <div className={styles.method}>
@@ -216,7 +211,7 @@ const Home: NextPageWithLayout = () => {
         </div>
       </div>
 
-      {pageLoaded && <Footer />}
+      <Footer />
     </div>
   );
 };
