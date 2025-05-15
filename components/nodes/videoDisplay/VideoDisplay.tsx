@@ -18,7 +18,6 @@ export default function VideoDisplay(props: VideoDisplayProps) {
         alt="Thumbnail"
         src={poster}
         className={`object-cover h-full w-full -z-10 ${className}`}
-        loader={({ src }) => `/api/imageDisplay/${src}?thumbnail=true`}
       />
 
       <video
