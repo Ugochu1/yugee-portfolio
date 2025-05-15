@@ -27,7 +27,7 @@ const ProjectList: FC<ProjectDataProps> = ({ data, firstexpand }) => {
                 query: { id: details.id },
               }}
             >
-              {!details.videos && <ImageDisplay src={"/images/" + details.mainPicture} className="z-[-1]" />}
+              {!details.videos && <ImageDisplay src={"/" + details.mainPicture} className="z-[-1]" />}
               {details.videos && <VideoDisplay src={details.videos[0]} poster={details.mainPicture} className="z-[-1]" />}
 
               <div className={styles.details}>

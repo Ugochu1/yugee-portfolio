@@ -23,7 +23,7 @@ const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
       <div className={styles.pageWrapper}>
         <div className={styles.details}>
           <div className={styles.imageWrapper}>
-            <ImageDisplay src={"/images/" + projectData[0].mainPicture} />
+            <ImageDisplay src={"/" + projectData[0].mainPicture} />
           </div>
           <div className={styles.mainContainer}>
             <div className={styles.left + " text-[12px]"}>
@@ -113,7 +113,7 @@ const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
           {projectData[0].pictures?.map((pic_name, index) => {
             return (
               <div key={index} className={styles.image}>
-                <ImageDisplay src={"/images/" + pic_name} />
+                <ImageDisplay src={"/" + pic_name} />
               </div>
             );
           })}
