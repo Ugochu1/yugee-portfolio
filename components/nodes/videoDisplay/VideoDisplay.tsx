@@ -8,6 +8,7 @@ type VideoDisplayProps = {
 
 export default function VideoDisplay(props: VideoDisplayProps) {
   const { src, poster, className } = props;
+  const thumbnail = poster.split(".")[0] + "-thumbnail.jpg"
 
   return (
     <div className="relative w-full h-full">
@@ -16,7 +17,7 @@ export default function VideoDisplay(props: VideoDisplayProps) {
         fill
         priority
         alt="Thumbnail"
-        src={poster}
+        src={thumbnail}
         className={`object-cover h-full w-full -z-10 ${className}`}
       />
 
