@@ -28,11 +28,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const fileExtension = path.extname(fileName);
       const baseFileName = path.basename(fileName, fileExtension);
 
-      const originalPath = path.join(process.cwd(), `/pages/api/images/${baseFileName}${fileExtension}`);
+      const originalPath = path.join(process.cwd(), `/public/images/${baseFileName}${fileExtension}`);
       fs.writeFileSync(originalPath, buffer as unknown as Uint8Array);
 
       const thumbnailBuffer = await sharp(buffer).blur(1).resize(10).toBuffer();
-      const thumbnailPath = path.join(process.cwd(), `/pages/api/images/${baseFileName}-thumbnail.jpg`);
+      const thumbnailPath = path.join(process.cwd(), `/public/images/${baseFileName}-thumbnail.jpg`);
       fs.writeFileSync(thumbnailPath, thumbnailBuffer as unknown as Uint8Array);
 
       return res.status(200).json({ message: "Success" });

@@ -89,7 +89,7 @@ const Home: NextPageWithLayout = () => {
         <div className={styles.intro}>
           <div className={styles.imageDisplay}>
             <div className={styles.imageBackground}>
-              <ImageDisplay src="display_pic.jpg" />
+              <ImageDisplay src="/images/display_pic.jpg" />
             </div>
           </div>
           <div>

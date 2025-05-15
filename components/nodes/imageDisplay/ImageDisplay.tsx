@@ -8,25 +8,8 @@ type ImageDisplayProps = {
 
 export default function ImageDisplay(props: ImageDisplayProps) {
   const { src, className } = props;
-
+  const thumbnail = src.split(".")[0] + "-thumbnail.jpg"
   const [isLoading, setIsLoading] = useState(true);
-
-  const loader = ({
-    width,
-    quality,
-    src,
-  }: {
-    width: number;
-    quality?: number;
-    src: string;
-  }) => {
-    const props = [`w=${width}`];
-    if (quality) props.push(`q=${quality}`);
-
-    const queryString = props.join("&");
-
-    return `/api/imageDisplay/${src}?${queryString}`;
-  };
 
   return (
     <div className="relative w-full h-full">
@@ -35,9 +18,8 @@ export default function ImageDisplay(props: ImageDisplayProps) {
         fill
         priority
         alt="Thumbnail"
-        src={src}
+        src={thumbnail}
         className={`object-cover h-full w-full ${className}`}
-        loader={({ src }) => `/api/imageDisplay/${src}?thumbnail=true`}
       />
 
       <Image
@@ -47,7 +29,6 @@ export default function ImageDisplay(props: ImageDisplayProps) {
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
         src={src}
-        loader={loader}
         onLoadingComplete={() => setIsLoading(false)}
         onContextMenu={(e) => e.preventDefault()}
       />
