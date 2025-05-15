@@ -28,7 +28,7 @@ const Navbar: FC = () => {
     } else {
       setActive("home");
     }
-    setDropped(false)
+    setDropped(false);
   }, [router.pathname]);
 
   return (
@@ -71,6 +71,13 @@ const Navbar: FC = () => {
                 Projects
               </p>
             </Link>
+            <Link
+              href="https://drive.google.com/file/d/1j_PwbA5-F5_2mfc0kkypMwYtnaAtJKpb/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p className={styles.link}>My Resume</p>
+            </Link>
           </div>
           <div className="flex flex-col lg:items-end items-center">
             <p className={styles.def}>Social:</p>
@@ -80,13 +87,21 @@ const Navbar: FC = () => {
                   EMAIL
                 </AnimRollup>
               </Link>
-              <Link href="https://github.com/Ugochu1" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://github.com/Ugochu1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {/* {JSON.stringify(scrollPos)} */}
                 <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
                   GITHUB
                 </AnimRollup>
               </Link>
-              <Link href="https://www.linkedin.com/in/olinya-ugochukwu-8a5b7a252/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.linkedin.com/in/olinya-ugochukwu-8a5b7a252/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <AnimRollup className="text-lg px-[7px] lg:text-[12px] lg:px-[5px]">
                   IN
                 </AnimRollup>
