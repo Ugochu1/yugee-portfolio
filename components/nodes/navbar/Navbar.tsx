@@ -28,6 +28,7 @@ const Navbar: FC = () => {
     } else {
       setActive("home");
     }
+    setDropped(false)
   }, [router.pathname]);
 
   return (

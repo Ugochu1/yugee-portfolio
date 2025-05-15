@@ -106,7 +106,7 @@ const ProjectId: NextPageWithLayout<{ projectData: ProjectData[] }> = ({
             return (
               <div key={index} className={styles.image}>
                 {/* <video className="w-full h-full object-cover" src={video} poster="/liveness-main-thumbnail.jpg" autoPlay muted loop playsInline /> */}
-                <VideoDisplay src={video} poster="liveness-main.png" />
+                <VideoDisplay src={video} poster="/liveness-main-thumbnail.png" />
               </div>
             );
           })}
